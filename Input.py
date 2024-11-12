@@ -35,7 +35,3 @@ if choice == 2:
 
 else:
     print("you entered a number which is neither 1 nor 2")
-
-
-
-#hi from github
