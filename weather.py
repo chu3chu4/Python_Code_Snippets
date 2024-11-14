@@ -33,7 +33,7 @@ class Weather:
 
     def fetch_data(self):
         try:
-            response = requests.get(f"https://api.openweathermap.org/data/3.0/onecall?lat={self.lat}&lon={self.lon}&appid={self.API_key}&exclude=minutely,hourly,daily,alerts&units=metric")
+            response = requests.get(f"https://api.openweathermap.org/data/3.0/onecall?lat={self.lat}&lon={self.lon}&appid={self.API_key}&exclude=minutely,hourly,daily,alerts&units={self.units}")
             response_json = response.json()
 
             self.currentTemp = response_json["current"]["temp"]
@@ -46,12 +46,17 @@ class Weather:
 
 
     def temp_print(self):
-        print(f"it is currently {self.currentTemp} °C in {self.city}")
+        if self.units == "metric":
+            temp_symbol = "C"
+        if self.units == "imperial":
+            temp_symbol ="F"
+
+        print(f"it is currently {self.currentTemp} °{temp_symbol} in {self.city}")
         print(f"the speed of the wind in {self.city} is currently {self.currentWind}")
 
 
 Chicago = Weather("Chicago", 41.8781, -87.6298)
 Chicago.temp_print()
 
-Beijing = Weather ("Beijing", 39.916668, 116.383331)
+Beijing = Weather ("Beijing", 39.916668, -116.383331,"imperial")
 Beijing.temp_print()
